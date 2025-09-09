@@ -5,7 +5,6 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -37,45 +36,49 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun MainScreen() {
-    var textGreeting by remember { mutableStateOf("Android") }
-
-    Column (
+    Column(
         modifier = Modifier
             .fillMaxWidth()
             .padding(vertical = 16.dp),
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
-        Greeting (
-            name = textGreeting,
+        Greeting(
+            name = "Android",
         )
-
-        Row (
-            modifier = Modifier.fillMaxWidth()
-        ) {
-            Button (
-                onClick = { textGreeting = "Qori Imaduddin" },
-                shape = RoundedCornerShape(16.dp),
-                modifier = Modifier.fillMaxWidth().padding(horizontal = 16.dp)
-            ) {
-                Text(
-                    text = "Press This!"
-                )
-            }
-        }
     }
 }
 
 @Composable
 fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Halo $name!",
-        fontSize = 24.sp,
-    )
+    var textGreeting by remember { mutableStateOf(name) }
+
+    Column(
+        modifier = Modifier
+            .fillMaxWidth(),
+        horizontalAlignment = Alignment.CenterHorizontally,
+    ) {
+        Text(
+            text = "Halo $textGreeting!",
+            fontSize = 24.sp,
+        )
+
+        Button(
+            onClick = { textGreeting = "Qori Imaduddin" },
+            shape = RoundedCornerShape(16.dp),
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(horizontal = 16.dp)
+        ) {
+            Text(
+                text = "Press This!"
+            )
+        }
+    }
 }
 
 @Preview(showBackground = true)
 @Composable
-fun GreetingPreview() {
+fun GreetingPreview1() {
     LatihanTheme {
         MainScreen()
     }
